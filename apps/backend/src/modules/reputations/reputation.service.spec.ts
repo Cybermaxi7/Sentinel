@@ -62,12 +62,7 @@ describe('ReputationCalculatorService', () => {
       },
     ];
 
-    const breakdown = calculator.composeBreakdown(
-      cleanActivity,
-      fraudIncidents,
-      indicators,
-      null,
-    );
+    const breakdown = calculator.composeBreakdown(cleanActivity, fraudIncidents, indicators, null);
     const score = calculator.composeFinalScore(breakdown);
 
     expect(score).toBeLessThan(50);
@@ -95,12 +90,7 @@ describe('ReputationCalculatorService', () => {
       detectedAt: new Date(),
     }));
 
-    const breakdown = calculator.composeBreakdown(
-      worstActivity,
-      worstIncidents,
-      manyIndicators,
-      0,
-    );
+    const breakdown = calculator.composeBreakdown(worstActivity, worstIncidents, manyIndicators, 0);
     const score = calculator.composeFinalScore(breakdown);
 
     expect(score).toBeGreaterThanOrEqual(REPUTATION_SCORE_MIN);

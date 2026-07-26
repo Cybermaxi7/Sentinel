@@ -1,6 +1,9 @@
 import { Type } from 'class-transformer';
 import { IsInt, IsOptional, IsString, Max, Min } from 'class-validator';
-import { DEFAULT_HISTORY_PAGE_SIZE, MAX_HISTORY_PAGE_SIZE } from '../constants/reputation.constants';
+import {
+  DEFAULT_HISTORY_PAGE_SIZE,
+  MAX_HISTORY_PAGE_SIZE,
+} from '../constants/reputation.constants';
 
 export class QueryReputationHistoryDto {
   @IsOptional()

@@ -48,11 +48,24 @@ export class ReputationCalculatorService {
       breakdown.incidentHistory.score * breakdown.incidentHistory.weight +
       breakdown.networkAssociation.score * breakdown.networkAssociation.weight;
 
-    return this.clamp(Math.round(weightedSum));
+    let finalScore = this.clamp(Math.round(weightedSum));
+
+    // A severely damaged incident-history factor (confirmed fraud cases push
+    // this at or below 60 — see scoreIncidentHistory) is disqualifying on its
+    // own merits. No combination of wallet age, activity, or network standing
+    // should be able to buy back a score into the NEUTRAL tier or above.
+    if (breakdown.incidentHistory.score <= 60) {
+      const neutralMin = REPUTATION_TIER_THRESHOLDS.find(
+        t => t.tier === ReputationTier.NEUTRAL,
+      )!.min;
+      finalScore = Math.min(finalScore, neutralMin - 1);
+    }
+
+    return finalScore;
   }
 
   tierForScore(score: number): ReputationTier {
-    const match = REPUTATION_TIER_THRESHOLDS.find((t) => score >= t.min);
+    const match = REPUTATION_TIER_THRESHOLDS.find(t => score >= t.min);
     return match ? match.tier : ReputationTier.HIGH_RISK;
   }
 
@@ -123,7 +136,7 @@ export class ReputationCalculatorService {
     return {
       score,
       weight: REPUTATION_WEIGHTS.riskIndicators,
-      details: indicators.map((i) => `[${i.severity}] ${i.code}: ${i.description}`),
+      details: indicators.map(i => `[${i.severity}] ${i.code}: ${i.description}`),
     };
   }
 

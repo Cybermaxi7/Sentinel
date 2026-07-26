@@ -2,7 +2,7 @@ import { IsBoolean, IsOptional, IsString } from 'class-validator';
 
 export class RecalculateReputationDto {
   @IsString()
-  chainId: string;
+  chainId!: string;
 
   /**
    * Bypasses the TTL cache check and forces a fresh calculation even if a

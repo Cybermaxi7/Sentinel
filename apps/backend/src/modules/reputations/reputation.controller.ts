@@ -5,15 +5,7 @@
  * `src/modules/api-keys`) in place of the placeholder import below once
  * merged — left explicit rather than silently unguarded.
  */
-import {
-  Body,
-  Controller,
-  Get,
-  Param,
-  Post,
-  Query,
-  UseGuards,
-} from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
 import { plainToInstance } from 'class-transformer';
 import { ReputationService } from './reputation.service';
 // import { ApiKeyGuard } from '../api-keys/api-key.guard';

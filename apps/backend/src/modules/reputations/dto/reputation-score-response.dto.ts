@@ -5,53 +5,53 @@ import { ReputationBreakdown, RiskIndicator } from '../interfaces/reputation.int
 @Exclude()
 export class ReputationScoreResponseDto {
   @Expose()
-  walletAddress: string;
+  walletAddress!: string;
 
   @Expose()
-  chainId: string;
+  chainId!: string;
 
   @Expose()
-  score: number;
+  score!: number;
 
   @Expose()
-  tier: ReputationTier;
+  tier!: ReputationTier;
 
   @Expose()
-  breakdown: ReputationBreakdown;
+  breakdown!: ReputationBreakdown;
 
   @Expose()
-  indicators: RiskIndicator[];
+  indicators!: RiskIndicator[];
 
   @Expose()
   @Type(() => Date)
-  calculatedAt: Date;
+  calculatedAt!: Date;
 }
 
 @Exclude()
 export class ReputationHistoryItemDto {
   @Expose()
-  score: number;
+  score!: number;
 
   @Expose()
-  tier: ReputationTier;
+  tier!: ReputationTier;
 
   @Expose()
   @Type(() => Date)
-  calculatedAt: Date;
+  calculatedAt!: Date;
 }
 
 @Exclude()
 export class PaginatedReputationHistoryDto {
   @Expose()
   @Type(() => ReputationHistoryItemDto)
-  items: ReputationHistoryItemDto[];
+  items!: ReputationHistoryItemDto[];
 
   @Expose()
-  total: number;
+  total!: number;
 
   @Expose()
-  limit: number;
+  limit!: number;
 
   @Expose()
-  offset: number;
+  offset!: number;
 }

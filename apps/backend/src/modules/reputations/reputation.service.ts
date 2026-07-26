@@ -104,7 +104,12 @@ export class ReputationService {
     return result;
   }
 
-  async getHistory(walletAddress: string, chainId: string | undefined, limit: number, offset: number) {
+  async getHistory(
+    walletAddress: string,
+    chainId: string | undefined,
+    limit: number,
+    offset: number,
+  ) {
     return this.repository.findHistory(walletAddress, chainId, limit, offset);
   }
 
