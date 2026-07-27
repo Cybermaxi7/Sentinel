@@ -315,6 +315,21 @@ model Invitation {
   @@map("invitations")
 }
 
+model ReputationScore {
+  id            String   @id @default(cuid())
+  walletAddress String
+  chainId       String
+  score         Int
+  tier          String
+  breakdown     Json
+  indicators    Json
+  calculatedAt  DateTime @default(now())
+
+  @@index([walletAddress, chainId])
+  @@index([walletAddress, chainId, calculatedAt])
+  @@map("reputation_scores")
+}
+
 model InvitationAuditLog {
   id           String   @id @default(cuid())
   invitationId String
